@@ -1,7 +1,13 @@
-console.log("bot is starting")
+/*
+Twit is apparantely outdated since Twitter updated their API
+
+However, for the puposes of the project, 
+    which is notify somehow everytime to get Elon Musk tweets eve
+*/
+
+console.log("bot is starting...")
 
 // ---------------- SUCCESSFULLY USED RANDOM JOKE API! -----------------
-// for jokes
 let url = "https://official-joke-api.appspot.com/random_joke"
 let importedJSON;
 let joke;

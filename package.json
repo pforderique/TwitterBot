@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/pforderique/TwitterBot#readme",
   "dependencies": {
+    "nodemailer": "^6.4.17",
     "twit": "^2.2.11"
   }
 }
