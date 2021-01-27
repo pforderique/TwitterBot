@@ -25,11 +25,12 @@ function getNewJoke(){
 }
 // -------------------- NODE MAILER ----------------------
 var nodemailer = require('nodemailer')
-
+var transporter = nodemailer.createTransport('./myinfo/gmailconfig');
+console.log(transporter)
 
 // ---------------- Twitter API Examples! -----------------
 var Twit = require('twit')
-var config = require('./config')
+var config = require('./myinfo/config')
 var T = new Twit(config)
 
 /* What can I do?
@@ -71,8 +72,8 @@ function tweetNewJoke() {
 }
 
 // How to set interval tweets...
-tweetNewJoke();
-setInterval(tweetNewJoke, 1000*10);
+// tweetNewJoke();
+// setInterval(tweetNewJoke, 1000*10);
 
 // Set up user stream (does not work)
     // var stream = T.stream('statuses/filter', { track: '@JakeOwe63612049' });
