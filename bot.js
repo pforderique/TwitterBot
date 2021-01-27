@@ -23,10 +23,12 @@ function getNewJoke(){
         }
     });
 }
+// -------------------- NODE MAILER ----------------------
+var nodemailer = require('nodemailer')
+
 
 // ---------------- Twitter API Examples! -----------------
 var Twit = require('twit')
-
 var config = require('./config')
 var T = new Twit(config)
 
