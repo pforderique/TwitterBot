@@ -18,15 +18,31 @@ function getNewJoke(){
     request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             importedJSON = JSON.parse(body);
-            joke = importedJSON.setup + "\n" +importedJSON.punchline
+            joke = importedJSON.setup + "\n" + importedJSON.punchline
             console.log(joke);
         }
     });
 }
 // -------------------- NODE MAILER ----------------------
 var nodemailer = require('nodemailer')
-var transporter = nodemailer.createTransport('./myinfo/gmailconfig');
-console.log(transporter)
+var gmailconfig = require('./myinfo/gmailconfig')
+var transporter = nodemailer.createTransport(gmailconfig);
+console.log(gmailconfig)
+
+var MAIL_INFO = {
+    from: gmailconfig.auth.user,
+    to: gmailconfig.auth.user, // send to myself
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+};
+
+transporter.sendMail(MAIL_INFO, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 
 // ---------------- Twitter API Examples! -----------------
 var Twit = require('twit')
@@ -72,8 +88,8 @@ function tweetNewJoke() {
 }
 
 // How to set interval tweets...
-// tweetNewJoke();
-// setInterval(tweetNewJoke, 1000*10);
+    // setInterval(tweetNewJoke, 1000*10);
+    // tweetNewJoke();
 
 // Set up user stream (does not work)
     // var stream = T.stream('statuses/filter', { track: '@JakeOwe63612049' });
