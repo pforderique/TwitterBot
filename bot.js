@@ -109,8 +109,8 @@ function tweetNewJoke() {
 
 // --------------------------- MAIN ----------------------------
 var topic = 'stocks'
-var numberOfResults = 5
-var TIME_CYCLE = 1000*15
+var numberOfResults = 10
+var TIME_CYCLE = 1000*60*60*12
 
 function mailAndTweet(firstTime=false) {
     getTweet(topic)
