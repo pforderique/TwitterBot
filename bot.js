@@ -1,8 +1,12 @@
 /*
-Twit is apparantely outdated since Twitter updated their API
+TWITTER BOT
 
-However, for the puposes of the project, 
-    which is notify somehow everytime to get Elon Musk tweets eve
+Piero Orderique
+28 Jan 2021
+
+This program was created as a learning project folllowing the CodingTrain
+on YT. I have updated the program to send me emails every now and then on
+a topic of my choice that it reads from using the twitter API
 */
 
 console.log("Twitter bot is starting...\n")
