@@ -5,7 +5,7 @@ However, for the puposes of the project,
     which is notify somehow everytime to get Elon Musk tweets eve
 */
 
-console.log("bot is starting...\n")
+console.log("Twitter bot is starting...\n")
 // ---------------- SUCCESSFULLY USED RANDOM JOKE API! -----------------
 let url = "https://official-joke-api.appspot.com/random_joke"
 let joke;
@@ -55,16 +55,6 @@ function mailJoke(firstTime=false) {
         sendMail(joke)
     }
 }
-//email a new tweets
-function mailTweets(firstTime=false) {
-    getTweet('stocks')
-    if(firstTime) {
-        sendMail("TWEET BOT INITIATED")
-    } else {
-        sendMail(all_tweets)
-    }
-}
-
 // ---------------- Twitter API Examples! -----------------
 var Twit = require('twit')
 var config = require('./myinfo/config')
@@ -80,15 +70,15 @@ var T = new Twit(config)
 function getTweet(topic) {
     var params = {
         q: topic, //'banana since:2011-11-11',
-        count: 2,
+        count: numberOfResults,
     }
     T.get('search/tweets', params, gotData);
     function gotData(err, data, response) {
         var tweets = data.statuses // list of statuses
         all_tweets = ''
         for(var tweet of tweets) {
-            console.log(tweet.text)
-            all_tweets += tweet.text + "\n"
+            console.log(tweet.user.screen_name + ':\n' + tweet.text)
+            all_tweets += tweet.user.screen_name + ':\n' + tweet.text + "\n"
         }
     }
 }
@@ -100,7 +90,7 @@ function tweetIt(txt) {
 }
 // helper function to see if tweet went through
 function tweeted(err, data, response) {
-    if(err) { console.log("Something went wrong!");
+    if(err) { console.log("Couldn't Tweet! Error: " + err);
     } else { console.log("Tweet Sent!") }
 }
 // tweet JOKE
@@ -114,10 +104,25 @@ function tweetNewJoke() {
     // setInterval(tweetNewJoke, 1000*10);
 
 // --------------------------- MAIN ----------------------------
-// mailJoke(true)
-// setInterval(mailJoke, 1000*10)
-mailTweets(true)
-setInterval(mailTweets, 1000*100)
+var topic = 'stocks'
+var numberOfResults = 5
+var TIME_CYCLE = 1000*15
+
+function mailAndTweet(firstTime=false) {
+    getTweet(topic)
+    if(firstTime) { 
+        var r = 1000 + Math.floor(Math.random()*1000)
+        sendMail("TWEET BOT INITIATED") 
+        tweetIt("My twitter bot " + r + " just started!")
+    } else {
+        sendMail(all_tweets)
+        // tweetIt(all_tweets.substring(0, 120) + '...') // NOT allowed auto RT trending topics!
+    }
+    console.log('-----------------------------------')
+}
+
+mailAndTweet(true)
+setInterval(mailAndTweet, TIME_CYCLE)
 
 // ---------------- streaming no long works :( -----------------
 
