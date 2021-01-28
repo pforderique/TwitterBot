@@ -43,7 +43,7 @@ function emailSent(error, info) {
     if (error) {
         console.log(error);
     } else {
-        console.log('Email sent: ' + info.response + "\n");
+        console.log('Email sent: ' + info.response);
     }
 }
 // email yourself a new joke
@@ -77,8 +77,8 @@ function getTweet(topic) {
         var tweets = data.statuses // list of statuses
         all_tweets = ''
         for(var tweet of tweets) {
-            console.log(tweet.user.screen_name + ':\n' + tweet.text)
-            all_tweets += tweet.user.screen_name + ':\n' + tweet.text + "\n"
+            console.log(tweet.user.screen_name + ':\n' + tweet.text + "\n-----------------------")
+            all_tweets += tweet.user.screen_name + ':\n' + tweet.text + "\n----------------------\n"
         }
     }
 }
@@ -115,10 +115,10 @@ function mailAndTweet(firstTime=false) {
         sendMail("TWEET BOT INITIATED") 
         tweetIt("My twitter bot " + r + " just started!")
     } else {
-        sendMail(all_tweets)
+        sendMail("Recent Tweets on " + topic + ":\n\n" + all_tweets)
         // tweetIt(all_tweets.substring(0, 120) + '...') // NOT allowed auto RT trending topics!
     }
-    console.log('-----------------------------------')
+    console.log("===============================================\n")
 }
 
 mailAndTweet(true)
